@@ -1,0 +1,60 @@
+<!-- <select class="form-control" ng-options="item.Field for item in items">
+  </select> -->
+  <nav class="navbar navbar-light bg-light justify-content-end">
+    <form class="form-inline">
+        <button class="btn-block">Logout</button>
+      <button class="btn-block" (click)="OnSaveUserSkills()">Save</button>
+    </form>
+  </nav>
+  <form  style="background:#63738a">
+      <br>
+        <div class="form-row" style="margin:0 auto; width: 70%">
+          <div class="col">
+                <select class="form-control" (change)="OnCategoryChange($event.target.value)">   
+                        <option>Choose a field of your skill</option>                             
+                        <option *ngFor="let category of skillCategories">{{category}}</option>
+                      </select>
+          </div>
+          <div class="col">
+                <select class="form-control" name="selectedSkills" [(ngModel)]="selectedSkills" multiple>                               
+                          <option [ngValue]="skill" *ngFor="let skill of skills">{{skill.Name}}</option> 
+                      </select>
+          </div>
+          <div class="col">
+                <button (click)="OnClick()">Add</button>
+          </div>
+        </div>
+        <br>
+      </form>
+ 
+<!-- <ul>
+  <li *ngFor="let item of items">{{item.Field}}</li>
+</ul> -->
+
+
+<table class="table table-bordered" style="width: 70%; margin: 0 auto" >
+    <thead>
+        <tr>
+            <th style="width: 30%">Field</th>
+            <th>Skill Rating</th>
+        </tr>
+    </thead>
+    <tbody *ngIf="isAdd">
+            <ng-container *ngFor="let category of userSkillCategories">
+                <tr>
+            <td>{{category}}</td>
+            <td>
+                <table class="table table-bordered" *ngFor="let skill of userSkills">
+                <tr *ngIf="skill.Category==category">
+                    <td style="width:30%">{{skill.Name}}</td>                   
+                    <app-star-rating (rateChanges)="onRateChange(skill,$event)"></app-star-rating>   
+                 </tr>                 
+                </table>
+            </td>
+            </tr>
+            </ng-container>
+    </tbody>
+</table>
+
+
+
